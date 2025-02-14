@@ -26,7 +26,8 @@ const AuthProviderWithRouter = ({ children }) => {
       toast.success('Login successful');
       router.push('/chat'); // Redirect to chat page after login
     } catch (error) {
-      toast.error(error.response?.data?.error?.message || 'Login failed');
+      // toast.error(error.response?.data?.error?.message || 'Login failed');
+      throw error(error.response?.data?.error?.message || 'Login failed');
     }
   };
 
