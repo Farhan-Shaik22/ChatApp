@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
 import { Eye, EyeOff } from "lucide-react"
+import toast from "react-hot-toast"
 
 export default function RegisterForm() {
   const router = useRouter()
@@ -44,7 +45,7 @@ export default function RegisterForm() {
       )
 
       // Handle successful registration
-      console.log("Registration successful:", response.data)
+      // console.log("Registration successful:", response.data)
       router.push("/login")
     } catch (error) {
       setIsError(true)
@@ -59,7 +60,7 @@ export default function RegisterForm() {
         // Other errors
         setErrorMessage("An unexpected error occurred.")
       }
-      console.error("Registration failed:", error)
+      toast.error("Registration failed:", error)
     } finally {
       setIsLoading(false)
     }

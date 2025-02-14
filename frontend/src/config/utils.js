@@ -1,6 +1,6 @@
 const DB_NAME = "ChatAppDB";
 const STORE_NAME = "messages";
-const DB_VERSION = 2; // Increment the version to apply schema changes
+const DB_VERSION = 2; // Version can remain as-is for new deployment
 
 const openDB = () => {
   return new Promise((resolve, reject) => {
@@ -8,13 +8,9 @@ const openDB = () => {
 
     request.onupgradeneeded = (event) => {
       const db = event.target.result;
+
       if (!db.objectStoreNames.contains(STORE_NAME)) {
         db.createObjectStore(STORE_NAME, { keyPath: "id", autoIncrement: true });
-      } else {
-        const store = event.target.transaction.objectStore(STORE_NAME);
-        if (!store.indexNames.contains("username")) {
-          store.createIndex("username", "username", { unique: false });
-        }
       }
     };
 
@@ -23,7 +19,6 @@ const openDB = () => {
       reject(new Error(`Failed to open database: ${event.target.error}`));
   });
 };
-
 
 // Store messages in IndexedDB
 export const storeMessages = async (messages, username) => {
@@ -63,21 +58,23 @@ export const storeMessages = async (messages, username) => {
   }
 };
 
-// Retrieve messages from IndexedDB
+// Retrieve messages from IndexedDB (Direct Filtering)
 export const retrieveMessages = async (username) => {
   let db;
   try {
     db = await openDB();
     const transaction = db.transaction(STORE_NAME, "readonly");
     const store = transaction.objectStore(STORE_NAME);
-    const index = store.index("username");
 
     return new Promise((resolve, reject) => {
-      const request = index.getAll(username); // Filter messages by username
+      const request = store.getAll(); // Retrieve all messages
 
       request.onsuccess = () => {
-        const messages = request.result || [];
-        resolve(messages.sort((a, b) => a.timestamp - b.timestamp));
+        const allMessages = request.result || [];
+        const filteredMessages = allMessages
+          .filter((message) => message.username === username) // Filter by username
+          .sort((a, b) => a.timestamp - b.timestamp); // Sort by timestamp
+        resolve(filteredMessages);
       };
 
       request.onerror = () =>
@@ -89,4 +86,3 @@ export const retrieveMessages = async (username) => {
     if (db) db.close();
   }
 };
-

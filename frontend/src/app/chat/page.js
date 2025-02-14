@@ -26,7 +26,7 @@ export default function ChatPage() {
           setMessages(storedMessages);
         }
       } catch (error) {
-        console.error("Failed to load messages:", error);
+        // console.error("Failed to load messages:", error);
         toast.error("Failed to load chat history");
       }
     };
@@ -40,7 +40,7 @@ export default function ChatPage() {
       try {
         await storeMessages(messages, user.username);
       } catch (error) {
-        console.error("Failed to save messages:", error);
+        // console.error("Failed to save messages:", error);
         toast.error("Failed to save chat history");
       }
     };
@@ -70,7 +70,7 @@ export default function ChatPage() {
     });
 
     socketRef.current.on("errorMessage", (error) => {
-      console.error("WebSocket error:", error);
+      // console.error("WebSocket error:", error);
       toast.error(error.message || "WebSocket error occurred");
     });
 
