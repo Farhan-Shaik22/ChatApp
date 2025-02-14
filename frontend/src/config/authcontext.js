@@ -23,6 +23,7 @@ const AuthProviderWithRouter = ({ children }) => {
       setAccessToken(response.data.jwt);
       setUser(response.data.user);
       localStorage.setItem('accessToken', response.data.jwt);
+      toast.success('Login successful');
       router.push('/chat'); // Redirect to chat page after login
     } catch (error) {
       toast.error(error.response?.data?.error?.message || 'Login failed');
@@ -31,10 +32,10 @@ const AuthProviderWithRouter = ({ children }) => {
 
   // Logout function
   const logout = () => {
+    router.push('/login'); // Redirect to login page after logout
     setAccessToken(null);
     setUser(null);
     localStorage.removeItem('accessToken');
-    router.push('/login'); // Redirect to login page after logout
   };
 
   // Validate token on page load or refresh
@@ -52,13 +53,14 @@ const AuthProviderWithRouter = ({ children }) => {
           );
           setAccessToken(storedAccessToken);
           setUser(response.data);
+          router.push('/chat'); 
         } catch (error) {
           console.error('Token validation failed:', error);
           setAccessToken(null);
           setUser(null);
           localStorage.removeItem('accessToken');
           if (pathname.startsWith('/chat')) {
-            router.push('/login'); // Redirect to login if token is invalid
+            router.push('/login'); 
           }
         }
       } else {
