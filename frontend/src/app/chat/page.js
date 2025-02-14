@@ -122,7 +122,7 @@ export default function ChatPage() {
 
   return (
     <div className="flex items-center justify-center min-h-screen p-3">
-      <div className="w-full max-w-2xl h-[80vh] flex flex-col bg-gray-900 rounded-lg shadow-2xl bg-opacity-80 overflow-auto z-20 border border-gray-700 mb-5 md:mb-0">
+      <div className="w-full max-w-2xl h-[80vh] flex flex-col bg-gray-900 rounded-lg shadow-2xl bg-opacity-80 overflow-auto z-20 border border-gray-700 mt-10 md:mb-0">
         {/* Header with Logout Button */}
         <div className="bg-gray-800 p-4 text-white font-semibold text-lg border-b border-gray-700 flex justify-between items-center">
           <span>Chat Room</span>
