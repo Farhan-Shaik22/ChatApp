@@ -35,7 +35,7 @@ export default function RegisterForm() {
     try {
       // Call Strapi registration endpoint
       const response = await axios.post(
-        "http://localhost:1337/api/auth/local/register",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/auth/local/register`,
         {
           username: formData.username,
           email: formData.email,
