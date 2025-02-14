@@ -30,7 +30,7 @@ export default {
     try {
       let io = new Server(strapi.server.httpServer, {
         cors: {
-          origin: ['http://localhost:3000', env.FRONTEND_URL],
+          origin: ['http://localhost:3000', 'http://192.168.29.48:3000', env.FRONTEND_URL],
           methods: ['GET', 'POST'],
           credentials: true,
         },
