@@ -19,7 +19,7 @@ export default function ChatPage() {
   // Load messages for the logged-in user
   useEffect(() => {
     const loadMessages = async () => {
-      if (!user || !user.username) return; // Ensure user and username exist
+      if (!user || !user.username) return; 
       try {
         const storedMessages = await retrieveMessages(user.username);
         if (storedMessages && storedMessages.length > 0) {
@@ -35,7 +35,7 @@ export default function ChatPage() {
 
   // Save messages for the logged-in user
   useEffect(() => {
-    if (!user || !user.username) return; // Ensure user and username exist
+    if (!user || !user.username) return;
     const saveMessages = async () => {
       try {
         await storeMessages(messages, user.username);
@@ -122,7 +122,7 @@ export default function ChatPage() {
 
   return (
     <div className="flex items-center justify-center min-h-screen p-3">
-      <div className="w-full max-w-2xl h-[80vh] flex flex-col bg-gray-900 rounded-lg shadow-2xl bg-opacity-80 overflow-hidden z-20 border border-gray-700">
+      <div className="w-full max-w-2xl h-[80vh] flex flex-col bg-gray-900 rounded-lg shadow-2xl bg-opacity-80 overflow-hidden z-20 border border-gray-700 mb-20 md:mb-0">
         {/* Header with Logout Button */}
         <div className="bg-gray-800 p-4 text-white font-semibold text-lg border-b border-gray-700 flex justify-between items-center">
           <span>Chat Room</span>

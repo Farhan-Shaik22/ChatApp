@@ -57,7 +57,7 @@ export default function Login() {
 
   return (
     <div className="flex items-center justify-center min-h-screen">
-      <Card className="w-full bg-gray-800 text-gray-100 border-gray-700 max-w-[350px] md:max-w-md z-20">
+      <Card className="w-full bg-gray-800 text-gray-100 border-gray-700 max-w-[350px] md:max-w-md z-20 mb-20 sm:mb-0">
         <CardHeader>
           <CardTitle className="text-2xl font-semibold tracking-tight flex items-center gap-3 text-violet-500">
             <span className="relative flex h-3 w-3">

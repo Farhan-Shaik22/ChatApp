@@ -2,7 +2,7 @@ import AnimatedButton from '@/components/ui/Animbutton';
 const WaveTextEffect = () => {
   return (
     <div className="w-full min-h-screen flex flex-col justify-center items-center relative">
-      <div className="relative z-10">
+      <div className="relative z-10 mb-20 sm:mb-0">
         <h1 className="text-7xl md:text-9xl font-bold text-violet-200 text-center">
           CHAT <span className='text-violet-500'>APP</span>
         </h1>
